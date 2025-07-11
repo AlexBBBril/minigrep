@@ -8,7 +8,7 @@ It supports optional case-insensitive search and is inspired by the Unix `grep` 
 ## Usage
 
 ```bash
-  minigrep [OPTIONS] <QUERY> <FILE_PATH>
+minigrep [OPTIONS] <QUERY> <FILE_PATH>
 ```
 
 ### Arguments
@@ -30,15 +30,15 @@ It supports optional case-insensitive search and is inspired by the Unix `grep` 
 Clone and build the project using Cargo:
 
 ```bash
-    git clone https://github.com/your-username/minigrep.git
-    cd minigrep
-    cargo build --release
+git clone https://github.com/your-username/minigrep.git
+cd minigrep
+cargo build --release
 ```
 
 Run the compiled binary:
 
 ```bash
-  ./target/release/minigrep [OPTIONS] <QUERY> <FILE_PATH>
+./target/release/minigrep [OPTIONS] <QUERY> <FILE_PATH>
 ```
 
 ---
@@ -46,12 +46,12 @@ Run the compiled binary:
 ## Examples
 
 ```bash
-    # Case-sensitive search
-    minigrep to poem.txt
-    
-    # Case-insensitive search using a flag
-    minigrep -i to poem.txt
-    
-    # Case-insensitive search using an environment variable
-    IGNORE_CASE=1 minigrep to poem.txt
+# Case-sensitive search
+minigrep to poem.txt
+
+# Case-insensitive search using a flag
+minigrep -i to poem.txt
+
+# Case-insensitive search using an environment variable
+IGNORE_CASE=1 minigrep to poem.txt
 ```
