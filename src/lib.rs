@@ -1,28 +1,38 @@
-use std::env;
+use clap::Parser;
 use std::error::Error;
 use std::fs;
 
+/// Search configuration
+#[derive(Parser, Debug)]
+#[command(about, long_about = None)]
 pub struct Config {
+
+    /// Query string
     pub query: String,
+
+    /// File path
     pub file_path: String,
+
+    /// Ignore the register when searching
+    #[arg(short = 'i', long)]
     pub ignore_case: bool,
 }
 
 impl Config {
-    pub fn build(args: &[String]) -> Result<Config, &'static str> {
-        if args.len() < 3 {
-            return Err("not enough arguments");
-        }
-
-        let ignore_case = env::var("IGNORE_CASE").is_ok();
-        let query = args[1].clone();
-        let file_path = args[2].clone();
+    pub fn build(config: Config) -> Result<Config, &'static str> {
+        let ignore_case = config.ignore_case;
+        let query: String = config.query;
+        let file_path: String = config.file_path;
 
         Ok(Config {
             query,
             file_path,
             ignore_case,
         })
+    }
+
+    pub fn parse_config() -> Config {
+        Config::parse()
     }
 }
 
