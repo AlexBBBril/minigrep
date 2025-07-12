@@ -3,10 +3,10 @@ use std::error::Error;
 use std::fs;
 
 /// Search configuration
+#[repr(align(64))]
 #[derive(Parser, Debug)]
 #[command(about, long_about = None)]
 pub struct Config {
-
     /// Query string
     pub query: String,
 
@@ -53,26 +53,17 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
 }
 
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    let mut lines = vec![];
-    for line in contents.lines() {
-        if line.contains(query) {
-            lines.push(line);
-        }
-    }
-
-    lines
+    contents
+        .lines()
+        .filter(|line| line.contains(query))
+        .collect()
 }
 
 pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    let mut results = vec![];
-    for line in contents.lines() {
-        let query = query.to_lowercase();
-        if line.to_lowercase().contains(&query) {
-            results.push(line);
-        }
-    }
-
-    results
+    contents
+        .lines()
+        .filter(|line| line.to_lowercase().contains(&query.to_lowercase()))
+        .collect()
 }
 
 #[cfg(test)]
